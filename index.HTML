@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Code Quiz Challenge</title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="./Assets/style.css">
+    </head>
+
+    <body>
+        <header>
+            <section id = "utility"> 
+                <div>
+                    <a href="/highscores.html" id="higest" class="button">View Highest Scores</a>
+                </div>
+                <div>
+                    <p id="timer">Timer: <span class="timer-count"></span></p>
+                </div>
+            </section>
+        </header>
+    
+        <main>
+            <section id="main-box">
+
+                <div class ="hide">
+                    <h1 class="quiz-game">Code Quiz Challenge</h1>
+                    <p class="instructions"> Try to answer the following code-related questions within 
+                        the allocated time limit. Incorrect answers will penalise your timer by 10secs</p>
+                </div>
+
+                <div id="initial-hide" class="question-box">
+                    <div id="questions">Questions</div>
+                    <div id="options" class="grid">
+                        <!-- <button class="button">Option 1</button>
+                        <button class="button">Option 2</button>
+                        <button class="button">Option 3</button>
+                        <button class="button">Option 4</button> -->
+                    </div>
+                </div>
+
+                <div id="controls" class="hide">
+                    <button class ="start-button button">Start</button>
+                </div>
+                
+                <div id="scores">
+                    <p class = "score"> Current Score <span class="current-score"></span></p>
+
+                </div>
+                    
+            </section>
+        </main>
+
+        <script src="./Assets/script.js"></script>
+    </body>
+</html>
