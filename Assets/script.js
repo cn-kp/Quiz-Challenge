@@ -1,38 +1,53 @@
 //getting my variable from html
 var startButton = document.querySelector(".start-button")
 var timerLeft = document.querySelector(".timer-count")
-var score = document.querySelector(".current-score")
+var scoreCount = document.querySelector(".current-score")
 var hidden1 = document.querySelectorAll(".hide")
 var displayQuestions = document.querySelector(".question-box")
 var currentQuestion = document.querySelector("#questions")
 var answerChoices = document.querySelector("#options")
 var unhide = document.querySelector("#initial-hide")
-
-
-var questionCount = 0
+var scoreBox = document.querySelector("#scores")
+var timerText=document.querySelector("#timer")
+var questionBox =document.querySelector("#questionBox")
 
 
 //creating a variable storing my questions
 var questionBank=[
     {
         question:"what is js commonly known as",
-        answers:["javascript", "java soap","javva srcipt", "jeva scr1pt"],
-        correct: "javascript"
+        answers:["javascript", "javasoap","javvasrcipt", "jevascr1pt"],
+        correct: 1,
     },
 
     {
         question:"what shortcut is used to comment a section in html",
         answers:["CTRL + /", "Shift + |","Alt + C", "CTRL + ALT"],
-        correct: "CTRL + /",
+        correct: 1,
     },
 
     {
         question: "what brackets are used for arrays",
         answers:["()","{}","[]","<>"],
-        correct:"[]",
+        correct:3,
     },
+
+    {
+        question:"what is used in conjunction with a if statement to indicate an alternative action",
+        answers:["for","while","else","let"],
+        correct:3,
+    },
+
+    {   
+        question:"which of the following is not a tag used in html",
+        answers:["<Head>","<body>","<learn>","<footer>"],
+        correct:3,
+    }
 ]
 
+//additional variables
+var timerCount=60;
+var timePenalty=10;
 
 startButton.addEventListener("click",startQuiz);
 
@@ -49,20 +64,28 @@ function startQuiz(){
     
 
     //creating my timer for the game
-    timerCount=60;
     var timerInterval = setInterval(function(){
     timerCount--;
     timerLeft.textContent=timerCount;
 
     if (timerCount == 0){
         clearInterval(timerInterval);
+        endQuiz();
+        timerLeft.textContent="time is up";
     }
+
     },1000)
 
     //calling set question function
-    setQuestion()
+    setQuestion();
+    
+    //score section
+    score=0;
 }
 
+var questionCount = 0
+
+//question function
 function setQuestion(){
     currentQuestion.innerText = questionBank[questionCount].question;
     
@@ -75,16 +98,17 @@ function setQuestion(){
     
 
         // currentQuestion.innerText = questionBank[i].question;
-        
-        //answerChoices.innerText = questionBank[i].answers
-        
-        
+  
     }
     var answerButtons = document.querySelectorAll("#answers");
+    
     for (i=0;i<answerButtons.length;i++){
         console.log(answerButtons)
         answerButtons[i].addEventListener("click",selectAnswer);
+        
     };
+
+
 }
 
 
@@ -92,8 +116,57 @@ function setQuestion(){
 // answerButtons.addEventListener("click",selectAnswer)
 
 function selectAnswer(){
-    console.log("hi")
 
+        // if (answerButtons[i]==questionBank[questionCount].correct){
+        
+        //     score++;
+        //     scoreCount.innerText=score
+        // }
+        console.log("hi");
 }
+
+function endQuiz (){
+    questionBox.innerHTML=""
+    scoreBox.style.display="none";
+    timerText.style.display="none";
+
+
+    //creating the page for when game is over
+
+    var endH1=document.createElement("h1");
+    endH1.textContent="Game Over";
+    questionBox.appendChild(endH1);
+
+    var endScore=document.createElement("p");
+    p.textContent="your end score is: " + score;
+    questionBox.appendChild(endScore);
+
+    var labelName = document.createElement("label")
+    labelName.textContent="enter your name:";
+    questionBox.appendChild(labelName);
+
+    var userNameInput=document.createElement("input");
+    userNameInput.setAttribute("type","text");
+    userNameInput.textContent="";
+    questionBox.appendChild(userNameInput);
+
+    var summitButton=document.createElement("button");
+    summitButton.setAttribute("type","sumbit");
+    summitButton.textContent="submit Name"
+    questionBox.appendChild(summitButton)
+
+    //adding click listener to submit button
+    summitButton.addEventListener("click", submission())
+};   
+
+function submission(){
+    var userName = userNameInput.value;
+    var finalScore = {
+        userName: userName,
+        score: score,
+    }
+    
+}
+
 
 
