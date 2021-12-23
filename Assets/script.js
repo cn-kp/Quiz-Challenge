@@ -10,6 +10,7 @@ var unhide = document.querySelector("#initial-hide")
 var scoreBox = document.querySelector("#scores")
 var timerText=document.querySelector("#timer")
 var questionBox =document.querySelector("#questionBox")
+var hidden2=document.querySelector("#initial-hide");
 
 
 //creating a variable storing my questions
@@ -17,64 +18,83 @@ var questionBank=[
     {
         question:"what is js commonly known as",
         answers:["javascript", "javasoap","javvasrcipt", "jevascr1pt"],
-        correct: 1,
+        correct: "javascript",
     },
 
     {
         question:"what shortcut is used to comment a section in html",
         answers:["CTRL + /", "Shift + |","Alt + C", "CTRL + ALT"],
-        correct: 1,
+        correct: "CTRL + /",
     },
 
     {
         question: "what brackets are used for arrays",
         answers:["()","{}","[]","<>"],
-        correct:3,
+        correct:"[]",
     },
 
     {
         question:"what is used in conjunction with a if statement to indicate an alternative action",
         answers:["for","while","else","let"],
-        correct:3,
+        correct:"else",
     },
 
     {   
         question:"which of the following is not a tag used in html",
         answers:["<Head>","<body>","<learn>","<footer>"],
-        correct:3,
-    }
+        correct:"<learn>",
+    },
+    {
+        question:"which of the following is not a tag used in html",
+        answers:["<Head>","<body>","<learn>","<footer>"],
+        correct:"<learn>",
+    },
+    {
+        question:"which of the following is not a tag used in html",
+        answers:["<Head>","<body>","<learn>","<footer>"],
+        correct:"<learn>",
+    },
+    {
+        question:"what is js commonly known as",
+        answers:["javascript", "javasoap","javvasrcipt", "jevascr1pt"],
+        correct: "javascript",
+    },
+
+    {
+        question:"what shortcut is used to comment a section in html",
+        answers:["CTRL + /", "Shift + |","Alt + C", "CTRL + ALT"],
+        correct: "CTRL + /",
+    },
+
+    {
+        question: "what brackets are used for arrays",
+        answers:["()","{}","[]","<>"],
+        correct:"[]",
+    },
+
+    {
+        question:"what is used in conjunction with a if statement to indicate an alternative action",
+        answers:["for","while","else","let"],
+        correct:"else",
+    },
 ]
 
-//additional variables
+//variables for timer
 var timerCount=60;
 var timePenalty=10;
 
+//listens for clicks made to start button and runs the start quiz function
 startButton.addEventListener("click",startQuiz);
 
+//function for starting the quiz
 function startQuiz(){
-
-    console.log(hidden1);
+    timerInterval();
     console.log("started quiz");
-    //hidden1.style.display ="none";
     for (var i = 0;i<hidden1.length;i++){
         hidden1[i].setAttribute("style","display:none")};
     
     //revealing the question box
     unhide.style.display="block"
-    
-
-    //creating my timer for the game
-    var timerInterval = setInterval(function(){
-    timerCount--;
-    timerLeft.textContent=timerCount;
-
-    if (timerCount == 0){
-        clearInterval(timerInterval);
-        endQuiz();
-        timerLeft.textContent="time is up";
-    }
-
-    },1000)
 
     //calling set question function
     setQuestion();
@@ -85,20 +105,35 @@ function startQuiz(){
 
 var questionCount = 0
 
-//question function
+function timerInterval() {
+        let timer1 = 
+        setInterval(function(){
+        let timerText=document.querySelector("#timer")
+        timerCount--;
+        timerLeft.textContent=timerCount;
+        console.log(timerCount)
+        
+        if (timerCount <= 0){
+            clearInterval(timer1);
+            //if timer hits 0 or less then the game is over and runs the end quiz function
+            endQuiz();
+            timerLeft.textContent="time is up";
+        }
+    
+        },1000)
+}
+
+//question function - sets the questions based on the question index and creates the answer options
 function setQuestion(){
     currentQuestion.innerText = questionBank[questionCount].question;
-    
+    console.log(questionCount);
+    answerChoices.innerHTML=""
+
     for (var i=0;i<questionBank[questionCount].answers.length;i++){
         var answer=document.createElement("button");
         answer.setAttribute("id", "answers")
         answer.textContent=questionBank[questionCount].answers[i];
         answerChoices.appendChild(answer);
-
-    
-
-        // currentQuestion.innerText = questionBank[i].question;
-  
     }
     var answerButtons = document.querySelectorAll("#answers");
     
@@ -107,27 +142,29 @@ function setQuestion(){
         answerButtons[i].addEventListener("click",selectAnswer);
         
     };
-
-
 }
 
-
-// var answerButtons = document.getElementById("answers");
-// answerButtons.addEventListener("click",selectAnswer)
-
-function selectAnswer(){
-
-        // if (answerButtons[i]==questionBank[questionCount].correct){
-        
-        //     score++;
-        //     scoreCount.innerText=score
-        // }
-        console.log("hi");
+//compared the answer selected by user to the correct answer and updates question index and runs set question again
+function selectAnswer(event){
+    if(event.target.textContent===questionBank[questionCount].correct){
+        score++;
+        questionCount++;
+        scoreCount.innerText=score;
+        setQuestion();
+    }else {
+        console.log(event.target.textContent);
+        questionCount++;
+        timerCount=timerCount-10;
+        setQuestion();
+    }
 }
 
 function endQuiz (){
     questionBox.innerHTML=""
-    scoreBox.style.display="none";
+    console.log("hi peeps")
+    hidden2.style.display="none";
+    
+    scoreBox.style.display="block";
     timerText.style.display="none";
 
 
@@ -138,7 +175,7 @@ function endQuiz (){
     questionBox.appendChild(endH1);
 
     var endScore=document.createElement("p");
-    p.textContent="your end score is: " + score;
+    endScore.textContent="your end score is: " + score;
     questionBox.appendChild(endScore);
 
     var labelName = document.createElement("label")
@@ -165,7 +202,11 @@ function submission(){
         userName: userName,
         score: score,
     }
-    
+
+    var allScores =localStorage.getItem("allScores");
+    allScores=JSON.parse(allScores)
+    allScores.push(finalScore);
+
 }
 
 
