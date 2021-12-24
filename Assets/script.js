@@ -13,6 +13,7 @@ var questionBox =document.querySelector("#questionBox")
 var hidden2=document.querySelector("#initial-hide");
 
 
+
 //creating a variable storing my questions
 var questionBank=[
     {
@@ -159,13 +160,15 @@ function selectAnswer(event){
     }
 }
 
+var userNameInput=document.createElement("input");
+
 function endQuiz (){
     questionBox.innerHTML=""
-    console.log("hi peeps")
     hidden2.style.display="none";
     
     scoreBox.style.display="block";
     timerText.style.display="none";
+    questionBox.style.display="block";
 
 
     //creating the page for when game is over
@@ -182,8 +185,9 @@ function endQuiz (){
     labelName.textContent="enter your name:";
     questionBox.appendChild(labelName);
 
-    var userNameInput=document.createElement("input");
+    //var userNameInput=document.createElement("input");
     userNameInput.setAttribute("type","text");
+    userNameInput.setAttribute("id","playerName")
     userNameInput.textContent="";
     questionBox.appendChild(userNameInput);
 
@@ -192,22 +196,30 @@ function endQuiz (){
     summitButton.textContent="submit Name"
     questionBox.appendChild(summitButton)
 
-    //adding click listener to submit button
-    summitButton.addEventListener("click", submission())
+    //adding click listener to submit button and runs function to save the name and score as string in array
+    summitButton.addEventListener("click", function(){  
+        var userName = document.querySelector("#playerName");
+        var finalScore = {
+            userName: userName.value,
+            score: score,
+        }
+
+        var allScores=localStorage.getItem("allScores");
+        if (allScores===null){
+            allScores=[];
+        }else{
+            allScores=JSON.parse(allScores);
+        }
+        //where the code stops working 
+        allScores.push(finalScore)
+        var highestScoreLadder = localStorage.setItem("allScores",JSON.stringify(allScores));
+        console.log(highestScoreLadder);
+        //window.location.replace("./scores.html");
+    })
 };   
 
-function submission(){
-    var userName = userNameInput.value;
-    var finalScore = {
-        userName: userName,
-        score: score,
-    }
 
-    var allScores =localStorage.getItem("allScores");
-    allScores=JSON.parse(allScores)
-    allScores.push(finalScore);
 
-}
 
 
 

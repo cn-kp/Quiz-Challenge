@@ -57,4 +57,9 @@
     display: none;
 } 
 
+.leaderboard{
+    font-size: 50px;
+    color: turquoise;
+    font-weight: bold;
+}
 
