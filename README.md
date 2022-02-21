@@ -5,7 +5,7 @@
 This program is created to test the skill of the user in a series coding related questions. This program heavily relies on javascript to dynamically update the page with elements such as the timer, setting up the questions and to update and save the scores. 
 
 This project is deployed to GitHub and can be accessed using the following links:
-    -[GitHub Repository](https://github.com/cn-kp/homework-week4-quiz-challenge)
+    -[GitHub Repository](https://github.com/cn-kp/Quiz-Challenge)
     -[GitHub Deployed Link](https://cn-kp.github.io/homework-week4-quiz-challenge/)
 
 ## Installation
