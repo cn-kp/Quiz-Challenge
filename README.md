@@ -1,4 +1,4 @@
-# Homework 4 - Quiz Challenge
+# Quiz Challenge
 
 ## Description
 
@@ -6,7 +6,7 @@ This program is created to test the skill of the user in a series coding related
 
 This project is deployed to GitHub and can be accessed using the following links:
     -[GitHub Repository](https://github.com/cn-kp/Quiz-Challenge)
-    -[GitHub Deployed Link](https://cn-kp.github.io/homework-week4-quiz-challenge/)
+    -[GitHub Deployed Link](https://cn-kp.github.io/Quiz-Challenge/)
 
 ## Installation
 
